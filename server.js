@@ -4,10 +4,11 @@ const app = express()
 const PORT = process.env.PORT || 8787;
 
 const { messageText, whatsapp } = require("./whatsapp");
+const { errorHandler } = require('./middleware/error-handler.mw');
 
 app.use(express.json())
 
-app.post("/send-message", async (req, res) => {
+app.post("/send-message", async (req, res, next) => {
     try {
         const info = req.body
 
@@ -19,11 +20,13 @@ app.post("/send-message", async (req, res) => {
         });
 
         whatsapp.end();
-        res.send("done")
+        return res.send({continueWork: true, message:"ההזמנה נשלחה, נחזור עלייך בהקדם"})
     } catch (error) {
-        console.log(error)
+        next(error)
     }
 })
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`listen on http://localhost:${PORT}`)
