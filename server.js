@@ -11,6 +11,7 @@ app.use(express.json())
 app.post("/send-message", async (req, res, next) => {
     try {
         const info = req.body
+        console.log(info)
 
         const data = messageText(info)
         whatsapp.write(data);
