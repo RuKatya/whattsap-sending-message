@@ -27,7 +27,7 @@ app.use(cors({
 app.post("/send-message", async (req, res, next) => {
     try {
         const info = req.body
-        console.log(info.candles[0].price)
+        // console.log(info.candles[0].price)
 
         const data = messageText(info)
         whatsapp.write(data);
