@@ -1,17 +1,18 @@
 require('dotenv').config()
+const cors = require("cors")
 const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8787;
-const cors = require("cors")
 
 const { messageText, whatsapp } = require("./whatsapp");
-// const { errorHandler } = require('./middleware/error-handler.mw');
+const { errorHandler } = require('./middleware/error-handler.mw');
 
 app.use(express.json())
 const corsOrigin = process.env.CORS_ORIGIN;
 const corsDev = process.env.CORS_DEV;
 const allowedOrigins = [corsOrigin, corsDev]
-app.use(cors<Request>({
+
+app.use(cors({
     origin: 
     function (origin, callback) {
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -21,7 +22,7 @@ app.use(cors<Request>({
         }
     },
     //process.env.NODE_ENV === 'production' ? corsOrigin : corsDev,
-    methods: ["POST"],
+    methods: ["POST", "GET", "DELETE", "PATCH"],
 }));
 
 app.post("/send-message", async (req, res, next) => {
@@ -43,7 +44,7 @@ app.post("/send-message", async (req, res, next) => {
     }
 })
 
-// app.use(errorHandler)
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`listen on http://localhost:${PORT}`)
