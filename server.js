@@ -8,7 +8,7 @@ const { messageText, whatsapp } = require("./whatsapp");
 const { errorHandler } = require('./middleware/error-handler.mw');
 
 app.use(express.json())
-const allowedOrigins = [corsOrigin, corsDev];
+const allowedOrigins = [corsOrigin, corsDev]
 app.use(cors<Request>({
     origin: 
     function (origin, callback) {
