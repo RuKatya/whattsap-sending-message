@@ -21,14 +21,13 @@ app.use(cors({
             callback(new Error('Not allowed by CORS'));
         }
     },
-    //process.env.NODE_ENV === 'production' ? corsOrigin : corsDev,
     methods: ["POST", "GET", "DELETE", "PATCH"],
 }));
 
 app.post("/send-message", async (req, res, next) => {
     try {
         const info = req.body
-        console.log(info)
+        console.log(info.candles[0].price)
 
         const data = messageText(info)
         whatsapp.write(data);

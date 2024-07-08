@@ -27,10 +27,16 @@ const options = {
 };
 
 exports.messageText = (userinfo) => {
-    const listofcandles = userinfo.candleItem.map(item => (`\n\nשם נר: ${item.candleName}\nצבע: ${item.color}\nריח: ${item.smell}\nכמות: ${item.quantity}\nמחיר: ${item.price}₪\nסה"כ לתשלום:${item.price * item.quantity}₪`))
-    const totalpricecandles = userinfo.candleItem.reduce((acc, cur) => (acc.quantity * acc.price) + (cur.quantity * cur.price))
+    const listofcandles = userinfo.candles.map(item => (`\n\nשם נר: ${item.name}\nצבע: ${item.color}\nריח: ${item.fragrance}\nכמות: ${item.quantity}\nמחיר: ${item.price} ₪\nסה"כ לתשלום:${item.price * item.quantity} ₪`))
+    const totalpricecandles = userinfo.candles.reduce((acc, cur) =>  (acc.quantity * acc.price) + (cur.quantity * cur.price), 0)
+
+    console.log(userinfo.candles[0].quantity)
+    console.log(userinfo.candles[0].price)
+    console.log(typeof totalpricecandles)
+    console.log(totalpricecandles)
+
     const text =
-        `היי 🎉,\nיש לנו הזמנה חדשה מ *${userinfo.customerName}*!\nמספר טלפון לחזרה: ${userinfo.phoneNo}\n\n*ההזמנה כולל*:${listofcandles}\n\n*תשלום סה"כ על כל ההזמנה*: ${totalpricecandles}₪`
+        `היי 🎉,\nיש לנו הזמנה חדשה מ *${userinfo.name}* !\nמספר טלפון לחזרה: ${userinfo.telNumber}\n\n*ההזמנה כולל*:${listofcandles}\n\n*תשלום סה"כ על כל ההזמנה*: ${totalpricecandles} ₪`
 
     return JSON.stringify({
         "from": { "type": "whatsapp", "number": from_number },
