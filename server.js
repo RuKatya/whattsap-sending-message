@@ -21,7 +21,7 @@ app.use(cors<Request>({
         }
     },
     //process.env.NODE_ENV === 'production' ? corsOrigin : corsDev,
-    methods: ["POST", "GET", "DELETE", "PATCH"],
+    methods: ["POST"],
 }));
 
 app.post("/send-message", async (req, res, next) => {
@@ -43,7 +43,7 @@ app.post("/send-message", async (req, res, next) => {
     }
 })
 
-app.use(errorHandler)
+// app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`listen on http://localhost:${PORT}`)
