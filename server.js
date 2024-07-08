@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8787;
 const cors = require("cors")
 
 const { messageText, whatsapp } = require("./whatsapp");
-const { errorHandler } = require('./middleware/error-handler.mw');
+// const { errorHandler } = require('./middleware/error-handler.mw');
 
 app.use(express.json())
 const corsOrigin = process.env.CORS_ORIGIN;
